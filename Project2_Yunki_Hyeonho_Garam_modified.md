@@ -24,7 +24,7 @@
 
 <img width="940" alt="3D_Schemetic" src="https://github.com/user-attachments/assets/a1a60961-12a2-42cb-a3e0-9ee3b040b1f1" />
 
-<center><strong>Fig 1. 3D Schematic of ROS Hamburger System</center>
+<center><strong>Fig 1. 3D Schematic of ROS Hamburger System</strong></center>
 
 ​	The food tech market is growing quite fast. Especially in the hamburger market, the market size has been expanded almost to about 5 trillion won. In the previous method, almost hamburger robot system was for the cooking patties of hamburger. However, if the process of stacking each ingredients of hamburger can be performed automatically, making hamburger would be performed more efficiently. In this reason, we built up overall automatic stacking system for hamburger in this project. 
 
@@ -36,7 +36,7 @@
 
 <img src="https://github.com/user-attachments/assets/5399c05a-68d2-4e18-b4f8-8b3c548fae08" alt="overview" style="zoom:50%;" />
 
-<center><strong>Fig 2. ROS System Set-Up Environment</center>
+<center><strong>Fig 2. ROS System Set-Up Environment</strong></center>
 
 
 
@@ -44,11 +44,11 @@
 
 - **Hardware**
   - Robot: Indy10
-  
+
   - Camera1: USB camera
-  
+
   - Camera2: USB camera
-  
+
   - Arduino Uno R3
   - Two Stepper Motors / Two Stepper Drivers (MSD-224)
   - Ultrasonic Sensor
@@ -178,9 +178,9 @@ subscribe: `ham_classifier/ham_info`, `image_processing/object_info`
   - `test_motion.py`
 
     
-    
+
     The code for `camera.py` is as follows.
-    
+
     ```python
     #!/usr/bin/env python3
     #-*- coding:utf-8 -*-
@@ -226,9 +226,9 @@ subscribe: `ham_classifier/ham_info`, `image_processing/object_info`
         except rospy.ROSInterruptException:
             pass
     ```
-    
+
     The code for `image_display.py` , `image_display_ocr.py`is as follows.
-    
+
     ```python
     #!/usr/bin/env python3
     #-*- coding:utf-8 -*- 
@@ -265,28 +265,28 @@ subscribe: `ham_classifier/ham_info`, `image_processing/object_info`
         except rospy.ROSInterruptException:
             pass
     ```
-    
+
     
 
 - add message in `catkin_ws/src/indy_driver/msg`
 
   - `object_info.msg`
-  
+
     ```
     string names
     float64 x_coords
     float64 y_coords
     float64 z_coords
     ```
-  
+
   - `ham_info.msg`
-  
+
     ```
     string name
     ```
-  
+
     
-  
+
 - modify the file `CMakeList.txt` in `catkin_ws/src/indy_driver`
 
 
@@ -295,7 +295,7 @@ subscribe: `ham_classifier/ham_info`, `image_processing/object_info`
 
 <img width="697" alt="Node" src="https://github.com/user-attachments/assets/dddac1c0-4ec6-455a-81ae-6b41f2ab6d85" style="zoom:150%;" />
 
-<center><strong>Fig 3. Diagram of ROS Process</center>	
+<center><strong>Fig 3. Diagram of ROS Process</strong></center>	
 
 ​	The build system described above can be visually represented as shown in the diagram. As mentioned earlier, information is received through two camera nodes. Each camera publishes information to a display node that presents it to the user. The patty information is published to the Image Processing node, while the user’s order information is published to the Classification node.
 
@@ -309,7 +309,7 @@ subscribe: `ham_classifier/ham_info`, `image_processing/object_info`
 
 <img src="https://github.com/user-attachments/assets/bc2e7ef7-b879-4011-87bc-13b353032122" alt="gripper1" style="zoom: 25%;" />
 
-<center><strong>Fig 4. Gripper Design</center>		
+<center><strong>Fig 4. Gripper Design</strong></center>		
 
 
 
@@ -329,7 +329,7 @@ subscribe: `ham_classifier/ham_info`, `image_processing/object_info`
 
 ![gripper2](https://github.com/user-attachments/assets/0d0640e4-155c-48af-949b-70af4de0118c)
 
-<center><strong>Fig 5. Slider Design</center>		
+<center><strong>Fig 5. Slider Design</strong></center>		
 
 ​	To address the first issue, the previously used gripper was removed, and a new hardware system in the form of a slider, resembling the one shown in the figure 5, was designed by combining a  stepper motor and a motor driver (MSD-224). This hardware was designed to provide flexibility in handling and placing materials regardless of their size or shape. Specifically, the slider system focused on ensuring stable movement of materials and was constructed as an improved structure to overcome the limitations of the previous system.
 
@@ -343,7 +343,7 @@ subscribe: `ham_classifier/ham_info`, `image_processing/object_info`
 
 <img src="https://github.com/user-attachments/assets/3835b320-cbc9-42ce-b31e-6781dc509b93" alt="gripper3" style="zoom:150%;" />
 
-<center><strong>Fig 6. Turner Design</center>		
+<center><strong>Fig 6. Turner Design</strong></center>		
 
 ​	To address the issues identified in Figures 4 and 5, we newly designed a spatula-type hardware system as shown in Figure 6. This hardware was designed to efficiently transport materials, aiming to facilitate the movement and placement of materials. However, in the initial design, an issue arose where materials moved unintentionally when being transferred or placed. This highlighted the need for a guard device to securely maintain the position of the materials.
 
@@ -357,7 +357,7 @@ subscribe: `ham_classifier/ham_info`, `image_processing/object_info`
 
 ​                 (a) Fence on the Conveyor Belt                (b) Fence on the Pick up Place	 			(c)  Fence on the Grill		
 
-<center><strong>Fig 7. Blocking the ingredients</center>		
+<center><strong>Fig 7. Blocking the ingredients</strong></center>		
 
 
 
@@ -365,7 +365,7 @@ subscribe: `ham_classifier/ham_info`, `image_processing/object_info`
 
 ![ConveyorBelt_Circuit](ConveyorBelt_Circuit.png)
 
-<center><strong>Fig 8. Design of a Conveyor Belt Using Arduino [1] </center>		
+<center><strong>Fig 8. Design of a Conveyor Belt Using Arduino [1] </strong></center>		
 
 ​	To carry each ingredient in front of the Indy 10 robot arm after this robot pick up each ingredient, we used the conveyor belt with ultrasonic. If there are not any ingredients in front of the ultrasonic sensor, the flag for running conveyor belt is turned on, and this conveyor belt will start to work. At the same time, because each ingredient need to be carried on the conveyor belt, the pence would be opened. However, if there are any ingredients in front of the ultrasonic sensor, the flat for running the conveyor belt is turned off, and this conveyor belt stops working. At this moment, to help to pick up each ingredients on the flipper, the pence would be closed. By repeating this carrying and pence system of Arduino, each ingredient can be carried in front of the robot arm automatically.
 
@@ -544,7 +544,7 @@ rosrun indy_driver test_motion.py
 
 ![OCR](https://github.com/user-attachments/assets/9988e706-19c1-4864-90f2-922fe7733b8e)
 
-<center><strong>Fig 9. OCR Deep Learning System Example Picture</center>		
+<center><strong>Fig 9. OCR Deep Learning System Example Picture</strong></center>		
 
 ​	To start this system, we need to inform what kind of hamburger we're going to make through the camera for OCR.	
 
@@ -610,7 +610,7 @@ if __name__ == "__main__":
 
 ![imageprocessing](https://github.com/user-attachments/assets/f499a0c2-4376-470b-a41b-d6a5c03d8a32)
 
-<center><strong>Fig 10. Patty Image Processing</center>		
+<center><strong>Fig 10. Patty Image Processing</strong></center>		
 
 ​		One of the most challenging tasks in the hamburger production process was image processing. Specifically, strong reflections from the grill and the characteristics of wide-angle cameras made accurate object detection difficult. Initially, when performing image processing against a white background, converting images to grayscale to detect objects and obtain their central coordinates was relatively straightforward. Additionally, coordinate calculations with random movement along the X and Y axes were feasible.
 
@@ -844,7 +844,7 @@ if __name__ == '__main__':
 
 <img src="Sequence.png" alt="Sequence">
 
-<center><strong>Fig 11. Overall Process of Repeating to Pick up and Stack Each Ingredient</center>		      
+<center><strong>Fig 11. Overall Process of Repeating to Pick up and Stack Each Ingredient</strong></center>		      
 
 ​	In the case of Bulgogi Hamburger, this robot would pick up the bread and place it on the stacking position. After this, this robot would turn to the right to pick up patty. In this case, the bulgogi patty would be picked up and would be placed on bread. Then this robot would pick up and place each ingredients (tomato, lettuce, and bread) repeatedly.
 
